@@ -1,6 +1,6 @@
-# Android Agent Skills
+# Android Code Review Skills
 
-Diff-first Android review skills for AI coding agents.
+Diff-first Android code review skills for AI coding agents.
 
 This repository gives Codex, Claude Code, Cursor, Gemini CLI, and other coding agents a practical Android code review workflow. The default behavior is intentionally narrow: review the developer's local diff, not the entire repository.
 
