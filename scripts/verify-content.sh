@@ -26,16 +26,30 @@ for file in "${required_files[@]}"; do
   fi
 done
 
+check_contains() {
+  local file_or_dir="$1"
+  local pattern="$2"
+  rg -n "$pattern" "$file_or_dir" >/dev/null
+}
+
 placeholder_pattern="T""BD|TO""DO|implement ""later|fill in ""details"
 if rg -n "$placeholder_pattern" "$ROOT"; then
   echo "Placeholder text found." >&2
   exit 1
 fi
 
-rg -n "local diff|git diff|git diff --cached" "$ROOT/README.md" >/dev/null
+check_contains "$ROOT/README.md" "local diff"
+check_contains "$ROOT/README.md" "git diff"
+check_contains "$ROOT/README.md" "git diff --cached"
 rg -n "Do not scan the whole repository|Do not review the whole repository|not the default" "$ROOT" >/dev/null
-rg -n "P0|P1|P2|P3" "$ROOT/docs/severity-model.md" >/dev/null
+check_contains "$ROOT/docs/severity-model.md" "P0"
+check_contains "$ROOT/docs/severity-model.md" "P1"
+check_contains "$ROOT/docs/severity-model.md" "P2"
+check_contains "$ROOT/docs/severity-model.md" "P3"
 rg -n "collectAsStateWithLifecycle" "$ROOT/skills/android-compose-diff-reviewer" >/dev/null
-rg -n "GlobalScope|withContext|flowOn|cancellation" "$ROOT/skills/android-coroutines-diff-reviewer" >/dev/null
+check_contains "$ROOT/skills/android-coroutines-diff-reviewer" "GlobalScope"
+check_contains "$ROOT/skills/android-coroutines-diff-reviewer" "withContext"
+check_contains "$ROOT/skills/android-coroutines-diff-reviewer" "flowOn"
+check_contains "$ROOT/skills/android-coroutines-diff-reviewer" "cancellation"
 
 echo "Content verification passed."
