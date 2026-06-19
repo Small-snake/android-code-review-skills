@@ -2,7 +2,19 @@
 
 Diff-first Android code review skills for AI coding agents.
 
-This repository gives Codex, Claude Code, Cursor, Gemini CLI, and other coding agents a practical Android code review workflow. The default behavior is intentionally narrow: review the developer's local diff, not the entire repository.
+![Android](https://img.shields.io/badge/Android-code%20review-3DDC84)
+![Skills](https://img.shields.io/badge/AI%20agents-skills-111827)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+Give Codex, Claude Code, Cursor, Gemini CLI, and other coding agents a practical Android review workflow. The default behavior is intentionally narrow: review the developer's local diff, not the entire repository.
+
+Use it when you want an agent to catch Android-specific issues before commit:
+
+- Compose lifecycle and state bugs.
+- Coroutine, Flow, dispatcher, and cancellation mistakes.
+- Main-thread blocking and ANR risk.
+- Missing verification for changed Android behavior.
+- Review output that separates commands actually run from recommended checks.
 
 ## Quick Start
 
@@ -22,6 +34,35 @@ git diff --cached
 ```
 
 It then reviews only the staged and unstaged Android changes, with minimal surrounding context when a changed hunk cannot be understood by itself.
+
+## 30-second demo
+
+Prompt:
+
+```text
+Use android-diff-reviewer to review my staged and unstaged Android changes. Stay scoped to the local diff unless a changed hunk requires nearby context.
+```
+
+Example finding:
+
+```text
+Scope: local uncommitted Android diff only.
+
+[P1] app/src/main/java/com/example/calls/CallLogScreen.kt:14
+The screen collects uiState with collectAsState(), so upstream Flow work can remain active when the lifecycle is stopped.
+
+Use collectAsStateWithLifecycle() and verify with a lifecycle recreation or navigation-away test.
+
+[P1] app/src/main/java/com/example/calls/CallRepository.kt:21
+GlobalScope.launch creates work that can outlive the caller and hide failures.
+
+Move the refresh into an owned scope, keep the suspend API cancellable, and add a cancellation test.
+```
+
+Try the full example:
+
+- [Sample diff](examples/sample-diff-review/sample-diff.md)
+- [Sample review result](examples/sample-diff-review/review.md)
 
 ## Skills
 
@@ -72,6 +113,10 @@ Verification:
 
 ## Installation
 
+### Install in Codex
+
+See [docs/install-codex.md](docs/install-codex.md).
+
 For Codex-style agents, copy one or more skill folders under your agent's skills directory:
 
 ```text
@@ -81,6 +126,10 @@ skills/android-coroutines-diff-reviewer/
 ```
 
 For tool-neutral use, paste the relevant `SKILL.md` into your coding agent and ask it to follow the workflow.
+
+## Share
+
+Want to introduce the project publicly? Start from [docs/launch-post.md](docs/launch-post.md).
 
 ## Recommended First Use
 
