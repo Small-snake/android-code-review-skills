@@ -1,0 +1,9 @@
+.DS_Store
+.idea/
+.vscode/
+*.iml
+build/
+out/
+.gradle/
+node_modules/
+*.log
