@@ -22,7 +22,13 @@ The new `isLoading`, `errorMessage`, and `items` fields can represent impossible
 
 Consider replacing the boolean/null combination with a sealed `CallLogUiState` and add transition tests for loading, content, empty, and error.
 
-Verification:
+Commands run:
+
+- `git status --short`
+- `git diff --stat`
+- `git diff`
+
+Recommended verification (not run):
 
 - `./gradlew test`
 - `./gradlew :app:lintDebug`

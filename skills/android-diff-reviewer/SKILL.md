@@ -44,11 +44,28 @@ Classify changed files as:
 - Documentation.
 - Unknown.
 
-Delegate mentally to focused checklists:
+Apply these embedded mini-checks before relying on any optional companion skill.
 
-- Use Compose review rules for changed Compose UI and state collection.
-- Use coroutine review rules for changed coroutine, Flow, repository, or ViewModel logic.
-- Use general Android review judgment for lifecycle, threading, architecture boundary, and test gap issues.
+Compose mini-checks:
+
+- Lifecycle-aware Flow collection, especially `collectAsStateWithLifecycle()` for UI state.
+- Impossible UI state combinations caused by independent booleans, nullable fields, or stale content.
+- `remember` versus `rememberSaveable` ownership for state that should or should not survive recreation.
+- Side-effect keys for `LaunchedEffect`, `DisposableEffect`, `produceState`, and similar APIs.
+- Heavy work in composition, including parsing, allocation-heavy mapping, IO, locks, or repeated sorting/filtering.
+- Lazy list keys when item identity matters for state, animations, or stable updates.
+
+Coroutines/Flow mini-checks:
+
+- Scope ownership and whether work is tied to the correct lifecycle, ViewModel, repository, or application scope.
+- Cancellation behavior, including child job ownership and cleanup.
+- Dispatcher use for blocking work such as IO, database, network, parsing, compression, or locks.
+- `GlobalScope` or manual scopes that can outlive their owner.
+- `flowOn` placement and whether the upstream dispatcher intent is still correct.
+- `catch` blocks that swallow cancellation or hide terminal errors.
+- Mutable Flow exposure, such as exposing `MutableStateFlow` or `MutableSharedFlow` outside the owning class.
+
+If installed, use companion Compose or coroutine skills only for deeper review after these mini-checks. The android-diff-reviewer skill must remain useful on its own.
 
 ## Checklist
 
@@ -68,7 +85,19 @@ Start with:
 Scope: local uncommitted Android diff only.
 ```
 
-Then list changed files, findings ordered by severity, and verification commands.
+Then list changed files, findings ordered by severity, commands actually run, recommended verification not run, and residual risk.
+
+Do not imply verification commands were run unless you actually ran them. Separate executed commands from recommendations:
+
+```text
+Commands run:
+- git status --short
+- git diff --stat
+
+Recommended verification (not run):
+- ./gradlew test
+- ./gradlew :app:lintDebug
+```
 
 Use severity:
 
@@ -89,7 +118,7 @@ Suggest a concrete fix and verification step.
 If there are no findings, say:
 
 ```text
-No blocking Android review findings found in the reviewed diff.
+No Android review findings found in the reviewed diff.
 ```
 
 Then list residual risk, especially tests or runtime traces not run.
