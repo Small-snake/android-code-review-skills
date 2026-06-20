@@ -1,12 +1,12 @@
 # Android Code Review Skills
 
-Diff-first Android code review skills for AI coding agents.
+Cross-agent, diff-first Android code review skills for AI coding agents.
 
 ![Android](https://img.shields.io/badge/Android-code%20review-3DDC84)
 ![Skills](https://img.shields.io/badge/AI%20agents-skills-111827)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
-Give Codex, Claude Code, Cursor, Gemini CLI, and other coding agents a practical Android review workflow. The default behavior is intentionally narrow: review the developer's local diff, not the entire repository.
+Give Codex, Claude Code, Cursor, Gemini CLI, OpenCode, and other coding agents a practical Android review workflow. The default behavior is intentionally narrow: review the developer's local diff, not the entire repository.
 
 Use it when you want an agent to catch Android-specific issues before commit:
 
@@ -34,6 +34,19 @@ git diff --cached
 ```
 
 It then reviews only the staged and unstaged Android changes, with minimal surrounding context when a changed hunk cannot be understood by itself.
+
+## Agent support
+
+These skills are plain Markdown first. Platform-specific files are thin adapters, similar to how Superpowers keeps reusable skills under `skills/` and adds harness-specific entry points around them.
+
+| Agent | Support | Install |
+| --- | --- | --- |
+| Codex | Native skills folder | [docs/install-codex.md](docs/install-codex.md) |
+| Claude Code | Skills folder or `CLAUDE.md` project instructions | [docs/install-claude-code.md](docs/install-claude-code.md) |
+| Cursor | `.cursor/rules` project rule | [docs/install-cursor.md](docs/install-cursor.md) |
+| Gemini CLI | `GEMINI.md` project instructions | [docs/install-gemini-cli.md](docs/install-gemini-cli.md) |
+| OpenCode | Project skills directory | [docs/install-opencode.md](docs/install-opencode.md) |
+| Other agents | `AGENTS.md` or pasted `SKILL.md` context | [docs/agent-support.md](docs/agent-support.md) |
 
 ## 30-second demo
 
@@ -113,19 +126,14 @@ Verification:
 
 ## Installation
 
-### Install in Codex
+Install for your agent:
 
-See [docs/install-codex.md](docs/install-codex.md).
-
-For Codex-style agents, copy one or more skill folders under your agent's skills directory:
-
-```text
-skills/android-diff-reviewer/
-skills/android-compose-diff-reviewer/
-skills/android-coroutines-diff-reviewer/
-```
-
-For tool-neutral use, paste the relevant `SKILL.md` into your coding agent and ask it to follow the workflow.
+- [Codex](docs/install-codex.md)
+- [Claude Code](docs/install-claude-code.md)
+- [Cursor](docs/install-cursor.md)
+- [Gemini CLI](docs/install-gemini-cli.md)
+- [OpenCode](docs/install-opencode.md)
+- [Agent support matrix](docs/agent-support.md)
 
 ## Share
 

@@ -1,0 +1,14 @@
+# Android Code Review Skills
+
+When the user asks for Android code review, local diff review, pre-commit review, staged review, or review of uncommitted Android changes, use `skills/android-diff-reviewer/SKILL.md` as the entry point.
+
+Stay scoped to staged and unstaged Android changes by default. Inspect:
+
+```bash
+git status --short
+git diff --stat
+git diff
+git diff --cached
+```
+
+Use nearby context only when a changed hunk cannot be understood from the diff. Do not scan the whole repository by default.

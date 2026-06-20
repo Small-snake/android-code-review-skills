@@ -2,9 +2,11 @@
 
 ## Short version
 
-I built `android-code-review-skills`: diff-first Android code review skills for AI coding agents.
+I built `android-code-review-skills`: cross-agent, diff-first Android code review skills for AI coding agents.
 
 Most agent reviews drift into whole-repo commentary. This project keeps review scoped to staged and unstaged Android changes, then checks for the bugs Android developers actually care about: Compose lifecycle mistakes, impossible UI state, coroutine ownership, Flow semantics, dispatcher misuse, ANR risk, and missing verification.
+
+It works as portable Markdown skills with setup notes for Codex, Claude Code, Cursor, Gemini CLI, OpenCode, and generic coding agents.
 
 Repo: https://github.com/Small-snake/android-code-review-skills
 
@@ -31,7 +33,7 @@ Then it applies Android-focused checks:
 - Test gaps for changed lifecycle, state, persistence, parsing, or concurrency behavior.
 - Clear separation between commands actually run and recommended verification.
 
-It is small on purpose. You can use it in Codex, Claude Code, Cursor, Gemini CLI, or any coding agent that accepts Markdown instructions.
+It is small on purpose. You can use it in Codex, Claude Code, Cursor, Gemini CLI, OpenCode, or any coding agent that accepts Markdown instructions.
 
 Repo: https://github.com/Small-snake/android-code-review-skills
 

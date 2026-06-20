@@ -1,22 +1,16 @@
 # Supported Agents
 
-These skills are plain Markdown workflows. They are packaged as `SKILL.md` files so Codex-style agents can consume them directly, but they are also useful in generic coding agents.
+See [agent-support.md](agent-support.md) for the current cross-agent support matrix.
 
-## Codex-Style Skill Use
+These skills are plain Markdown workflows. They are packaged as `SKILL.md` files so native skill systems can consume them directly, but they also work in agents that accept project instructions or pasted context.
 
-Copy a skill folder into the agent's skills directory and ask:
+The core rule is the same everywhere:
 
 ```text
-Use android-diff-reviewer to review my local Android changes.
+Use android-diff-reviewer to review my staged and unstaged Android changes. Stay scoped to the local diff unless a changed hunk requires nearby context.
 ```
 
-## Generic Agent Use
-
-Paste the content of the relevant `SKILL.md` into the agent, then ask it to review the current local diff.
-
-## Cursor or IDE Chat Use
-
-Attach or paste the `SKILL.md`, then provide the output of:
+If an agent does not support skill folders, paste `skills/android-diff-reviewer/SKILL.md` into context and provide:
 
 ```bash
 git status --short
@@ -24,9 +18,3 @@ git diff --stat
 git diff
 git diff --cached
 ```
-
-Ask the agent to stay scoped to the diff unless it needs nearby context.
-
-## CI Comment Use
-
-This first release is designed for human-triggered agent review. CI integration can be added later by packaging the diff and changed-file metadata into a prompt.
