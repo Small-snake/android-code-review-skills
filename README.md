@@ -152,12 +152,6 @@ Recommended verification (not run):
 Use android-diff-reviewer to review my staged and unstaged Android changes. Stay scoped to the local diff unless a changed hunk requires nearby context.
 ```
 
-## 分享
-
-如果你想介绍这个项目，可以从这里改：
-
-- [docs/launch-post.md](docs/launch-post.md)
-
 ## 许可证
 
 MIT

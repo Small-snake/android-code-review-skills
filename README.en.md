@@ -152,12 +152,6 @@ Start with the entry skill. Do not ask the agent to scan the whole repository fi
 Use android-diff-reviewer to review my staged and unstaged Android changes. Stay scoped to the local diff unless a changed hunk requires nearby context.
 ```
 
-## Share
-
-Want to introduce the project publicly? Start from:
-
-- [docs/launch-post.md](docs/launch-post.md)
-
 ## License
 
 MIT
