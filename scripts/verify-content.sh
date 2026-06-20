@@ -57,6 +57,9 @@ if rg -n "$placeholder_pattern" "$ROOT"; then
 fi
 
 check_contains "$ROOT/README.md" "local diff" "README local diff wording"
+check_contains "$ROOT/README.md" "本地 diff" "README Chinese local diff wording"
+check_contains "$ROOT/README.md" "中文" "README Chinese-first wording"
+check_contains "$ROOT/README.md" "安装" "README Chinese installation wording"
 check_contains "$ROOT/README.md" "git diff" "README git diff wording"
 check_contains "$ROOT/README.md" "git diff --cached" "README staged diff wording"
 check_contains "$ROOT/README.md" "30-second demo" "README fast demo section"
