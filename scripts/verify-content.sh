@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 required_files=(
   "README.md"
+  "README.en.md"
   "LICENSE"
   "docs/review-scope.md"
   "docs/severity-model.md"
@@ -56,15 +57,18 @@ if rg -n "$placeholder_pattern" "$ROOT"; then
   exit 1
 fi
 
-check_contains "$ROOT/README.md" "local diff" "README local diff wording"
 check_contains "$ROOT/README.md" "本地 diff" "README Chinese local diff wording"
-check_contains "$ROOT/README.md" "中文" "README Chinese-first wording"
 check_contains "$ROOT/README.md" "安装" "README Chinese installation wording"
+check_contains "$ROOT/README.md" "English" "README English version link"
+check_contains "$ROOT/README.en.md" "local diff" "English README local diff wording"
+check_contains "$ROOT/README.en.md" "中文" "English README Chinese version link"
+check_contains "$ROOT/README.en.md" "Installation" "English README installation wording"
+check_contains "$ROOT/README.en.md" "Agent support" "English README agent support section"
 check_contains "$ROOT/README.md" "git diff" "README git diff wording"
 check_contains "$ROOT/README.md" "git diff --cached" "README staged diff wording"
-check_contains "$ROOT/README.md" "30-second demo" "README fast demo section"
+check_contains "$ROOT/README.md" "30 秒示例" "README fast demo section"
 check_contains "$ROOT/README.md" "docs/install-codex.md" "README Codex install link"
-check_contains "$ROOT/README.md" "Agent support" "README agent support section"
+check_contains "$ROOT/README.md" "Agent 支持" "README agent support section"
 check_contains "$ROOT/README.md" "Claude Code" "README Claude Code support"
 check_contains "$ROOT/README.md" "Cursor" "README Cursor support"
 check_contains "$ROOT/README.md" "Gemini CLI" "README Gemini CLI support"
