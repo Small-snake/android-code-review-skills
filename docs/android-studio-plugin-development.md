@@ -1,5 +1,7 @@
 # Android Studio Plugin Development Plan
 
+[中文](android-studio-plugin-development.zh-CN.md)
+
 This document defines the product and engineering plan for turning `android-code-review-skills` into an Android Studio plugin that can run Android diff reviews and display findings inside the IDE.
 
 ## 1. Product Goal
